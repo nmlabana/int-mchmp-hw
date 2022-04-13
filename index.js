@@ -13,7 +13,6 @@ const hashPattern = /(^\s*#{1,6})\s+/;
 / Main function that: 
 / * accepts markdown as input
 / * generates the HTML
-/ * updates DOM to display the HTML (step added just for the purpose of this exercise)
 / * returns the HTML 
 */
 const generateHTML = (markdownInput) => {
