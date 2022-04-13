@@ -6,7 +6,7 @@ import { testCasesList } from './testCases.js';
 
 const rootDiv = document.getElementById('root');
 
-// Regex hashPattern description: Starts with #, with 1 to 6 occurance of #, followed by 1 or more white space chars
+// Regex hashPattern description: New line starts with 0 or more white space chars, followed by 1 upto 6 occurance of #, followed by 1 or more white space chars
 const hashPattern = /(^\s*#{1,6})\s+/; 
 
 /*
