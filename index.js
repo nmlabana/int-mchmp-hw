@@ -1,7 +1,9 @@
-const appDiv = document.getElementById('root');
+import { testCasesList } from './testCases.js';
+
+const rootDiv = document.getElementById('root');
 
 // Regex hashPattern description: Starts with #, with 1 to 6 occurance of #, followed by 1 or more white space chars
-const hashPattern = /(^#{1,6})\s+/; 
+const hashPattern = /(^\s*#{1,6})\s+/; 
 
 /*
 / Main function that: 
@@ -30,7 +32,7 @@ const generateHTML = (markdownInput) => {
   const newlinePattern = new RegExp(/(\n)\s*(\n)/);
 
   // Split the input markdown string using the newlinePattern regex match
-  let inputArray = markdownInput.split(newlinePattern);  
+  let inputArray = markdownInput.split(newlinePattern);
 
   let outputArray = [];
   try {
@@ -43,12 +45,11 @@ const generateHTML = (markdownInput) => {
     });
   } catch (e) {
     //display any error message to the screen
-    appDiv.innerHTML = "<h3>" + "System Error: " + e + "</h3>";
+    rootDiv.innerHTML = "<h3>" + "System Error: " + e + "</h3>";
     return;
   }
 
   const output = outputArray.join('\n\n'); //two line breaks added for readability
-  appDiv.innerHTML = output;
   return output;
 };
 
@@ -93,7 +94,7 @@ const formatLine = (inputLine) => {
       url,  // text between ()
       closeParanthesis // )
       ) => 
-        "<a " + "href='" + url + "'>" + displayText + "</a>");
+        "<a " + "href=\"" + url + "\">" + displayText + "</a>");
   
   return openTag + formattedLine + closeTag;
 };
@@ -102,34 +103,38 @@ const formatLine = (inputLine) => {
 
 /*----------Unit Tests (basic testing, without testing framework)------*/
 
-const input1 = `Hello there
-  
-  
+/*
+/ runTest executes a unit test by
+/ * comparing input to expectedOutput
+/ * and, prints both to the console
+/ * as well as renders the output to the page
+*/
+const runTest = (testCaseData) => {
+  {
+    const input = testCaseData.input;
+    const expectedOutput = testCaseData.expectedOutput;
+    const testNum = testCaseData.testNum;
 
-How are you?
-####      What's going on?
-###Line with a missing space after ###.
+    let testStatus = "Failed";
+    console.log("input: ", input);
+    const output = generateHTML(input);
+    console.log("output: ", output.split());
+    console.log("expectedOutput: ", expectedOutput.split());
+
+    if (output.trim() === expectedOutput.trim()) {
+      console.log("test passed");
+      testStatus = "Passed";
+    }
+
+    const testDiv = document.createElement("div");
+    testDiv.innerHTML += "------------------------------<br>"
+    testDiv.innerHTML += "Test # " + testNum + " " + testStatus;
+    testDiv.innerHTML += "<br>------------------------------"
+    testDiv.innerHTML += " <br>Rendered HTML: <br>" + output;
+    rootDiv.appendChild(testDiv);
+  }
+};
 
 
-   
-
-###### Another Header
-`;
-
-const input2 = `# Header one
-
-Hello there
-
-How are you?
-What's going on?
-
-This is a paragraph [with an inline link](http://google.com). Neat, [eh](https://www.yahoo.com)?
-
-## Another Header
-`; 
-
-console.log("input: ", input1);
-console.log("output: ", generateHTML(input1));
-
-console.log("input: ", input2);
-console.log("output: ", generateHTML(input2));
+//--------Run all the imported tests cases from testCases.js--------
+testCasesList && testCasesList.forEach(testCase => runTest(testCase));
