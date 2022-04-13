@@ -109,7 +109,8 @@ const formatLine = (inputLine) => {
 
 /*
 / runTest executes a unit test by
-/ * comparing input to expectedOutput
+/ * generating output by calling generateHTML(input),
+/ * comparing ouput to expectedOutput
 / * and, prints both to the console
 / * as well as renders the output to the page
 */
