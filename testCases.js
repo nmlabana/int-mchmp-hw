@@ -101,7 +101,7 @@ What's going on?
 
 This is a paragraph [with an inline link](http://google.com). Neat, [eh](https://www.yahoo.com)?
 
-####### Another Header
+####### Attempted Header with too many #s
 `;
   
 testData.expectedOutput = 
@@ -114,7 +114,7 @@ What's going on?</p>
 
 <p>This is a paragraph <a href="http://google.com">with an inline link</a>. Neat, <a href="https://www.yahoo.com">eh</a>?</p>
 
-<p>####### Another Header</p>`;
+<p>####### Attempted Header with too many #s</p>`;
 
 testCounter += 1;
 testData.testNum = testCounter;
