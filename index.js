@@ -90,13 +90,13 @@ const formatLine = (inputLine) => {
   // Regex linkPattern description: [ + text1 + ]+ ( + text2 + )
   const linkPattern = /(\[)([^\[\]]*)(\])(\()([^\(\)]*)(\))/g;
   formattedLine = formattedLine.replace(linkPattern, 
-    ( matchString, // [...](...)
-      openBracket, // [
+    ( _matchString, // [...](...)
+      _openBracket, // [
       displayText, // text between []
-      closeBracket, // ]
-      openParanthesis, // (
+      _closeBracket, // ]
+      _openParanthesis, // (
       url,  // text between ()
-      closeParanthesis // )
+      _closeParanthesis // )
       ) => 
         "<a " + "href=\"" + url + "\">" + displayText + "</a>");
   
