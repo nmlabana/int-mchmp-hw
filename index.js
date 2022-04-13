@@ -118,13 +118,14 @@ const runTest = (testCaseData) => {
     let testStatus = "Failed";
     console.log("input: ", input);
     const output = generateHTML(input);
-    console.log("output: ", output.split());
-    console.log("expectedOutput: ", expectedOutput.split());
+    console.log("output: ", output);
+    console.log("expectedOutput: ", expectedOutput);
 
     if (output.trim() === expectedOutput.trim()) {
-      console.log("test passed");
       testStatus = "Passed";
     }
+
+    console.log("test #: " + testNum + " " + testStatus);
 
     const testDiv = document.createElement("div");
     testDiv.innerHTML += "------------------------------<br>"
